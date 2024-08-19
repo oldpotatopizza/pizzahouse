@@ -39,7 +39,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(map);
 
             // 나이 20세 이상만 가입가능
-        }else if (userDTO.getUserAge() <= 0 ){
+        }else if (userDTO.getUserAge() <= 20 ){
 
             Map<Integer, String> map = new HashMap<>();
             map.put(userDTO.getUserAge(), "20세 이상만 가입이 가능합니다");
@@ -53,14 +53,14 @@ public class UserController {
             return ResponseEntity.badRequest().body(map);
 
             // 기본주소 반드시 입력
-        } else if (userDTO.getAdderess() == null) {
+        } else if (userDTO.getAdderess().isEmpty() || userDTO.getAdderess() == null) {
 
             Map<String, String > map = new HashMap<>();
             map.put(userDTO.getAdderess(), "기본주소는 필수 입력값입니다.");
             return ResponseEntity.badRequest().body(map);
 
             // 상세주소 반드시 입력
-        } else if (userDTO.getAdderessDetail() == null) {
+        } else if (userDTO.getAdderessDetail().isEmpty() || userDTO.getAdderessDetail() == null) {
 
             Map<String, String > map = new HashMap<>();
             map.put(userDTO.getAdderessDetail(), "상세주소는 필수 입력값입니다.");
