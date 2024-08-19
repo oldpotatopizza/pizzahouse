@@ -14,7 +14,7 @@ OS X & Linux:
 npm install my-crazy-module --save
 ```
 
-서은진은 바보이고 바보고 바보다
+서은진은 바보이고 바보고 바보다 real 바보
 
 Windows:
 
