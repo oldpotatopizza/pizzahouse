@@ -20,13 +20,13 @@ public class UserService {
 
     @Transactional
     public UserDTO userSave(UserDTO userDTO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userDTO.getUserName());
-        userEntity.setUserAge(String.valueOf(userDTO.getUserAge())); // String 으로 바꿔줘?
-        userEntity.setPostCode(userDTO.getPostCode());
-        userEntity.setAdderess(userDTO.getAdderess());
-        userEntity.setAdderessDetail(userDTO.getAdderessDetail());
-
+        UserEntity userEntity = new UserEntity.Builder()
+                .setUserName(userDTO.getUserName())
+                .setUserAge(userDTO.getUserAge())
+                .setPostCode(userDTO.getPostCode())
+                .setAdderess(userDTO.getAdderess())
+                .setAdderessDetail(userDTO.getAdderessDetail())
+                        .builder();
         userRepository.save(userEntity);
 
         return userDTO;
