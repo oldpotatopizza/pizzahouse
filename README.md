@@ -14,6 +14,7 @@ OS X & Linux:
 npm install my-crazy-module --save
 ```
 
+푸딩 왕바보
 Windows:
 
 ```sh
