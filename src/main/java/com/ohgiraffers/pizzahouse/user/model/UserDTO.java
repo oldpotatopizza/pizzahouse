@@ -10,17 +10,20 @@ public class UserDTO {
     private int postCode; // 우편번호
     private String adderess; //기본주소
     private String adderessDetail; //상세주소
+    private String status;
+
 
     public UserDTO() {
     }
 
-    public UserDTO(Integer userId, String userName, int userAge, int postCode, String adderess, String adderessDetail) {
+    public UserDTO(Integer userId, String userName, int userAge, int postCode, String adderess, String adderessDetail, String status) {
         this.userId = userId;
         this.userName = userName;
         this.userAge = userAge;
         this.postCode = postCode;
         this.adderess = adderess;
         this.adderessDetail = adderessDetail;
+        this.status = status;
     }
 
     public Integer getUserId() {
@@ -69,5 +72,26 @@ public class UserDTO {
 
     public void setAdderessDetail(String adderessDetail) {
         this.adderessDetail = adderessDetail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userAge=" + userAge +
+                ", postCode=" + postCode +
+                ", adderess='" + adderess + '\'' +
+                ", adderessDetail='" + adderessDetail + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

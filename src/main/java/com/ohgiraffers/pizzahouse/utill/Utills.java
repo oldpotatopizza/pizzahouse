@@ -9,5 +9,4 @@ public class Utills {
         boolean result = Pattern.matches(regex, input);
         return result;
     }
-
 }

@@ -27,6 +27,10 @@ public class UserEntity {
     @Column(name = "user_addressDetail")
     private String adderessDetail; //상세주소
 
+    @Column(name = "user_status")
+    private int status;
+
+
     public UserEntity() {
     }
 
@@ -36,6 +40,7 @@ public class UserEntity {
         private int postCode;
         private String adderess;
         private String adderessDetail;
+        private int status;
 
         public UserEntity builder() {
             if (userName == null || userAge == null || adderess == null || adderessDetail == null) {
@@ -87,6 +92,7 @@ public class UserEntity {
         this.postCode = builder.postCode;
         this.adderess = builder.adderess;
         this.adderessDetail = builder.adderessDetail;
+        this.status = builder.status;
     }
 
     public Integer getUserId() {
@@ -112,6 +118,8 @@ public class UserEntity {
     public String getAdderessDetail() {
         return adderessDetail;
     }
+
+    public int getStatus() {return status; }
 
     @Override
     public String toString() {
