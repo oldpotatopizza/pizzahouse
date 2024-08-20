@@ -1,5 +1,7 @@
 package com.ohgiraffers.pizzahouse.user.model;
 
+import java.util.List;
+
 public class UserDTO {
 
     private String userName; // 이름
@@ -17,6 +19,9 @@ public class UserDTO {
         this.postCode = postCode;
         this.adderess = adderess;
         this.adderessDetail = adderessDetail;
+    }
+
+    public UserDTO(List<UserEntity> allUser) {
     }
 
     public String getUserName() {

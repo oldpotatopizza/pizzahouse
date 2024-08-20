@@ -8,7 +8,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -38,8 +40,6 @@ public class UserService {
                     return null;
                 }
             }
-
-
         }
 
         UserEntity userEntity = new UserEntity.Builder()
@@ -58,7 +58,24 @@ public class UserService {
 
     }
 
+    public List<UserDTO> getAllUser() {
+        List<UserEntity> users = userRepository.findAll();
+        List<UserDTO> userDTOS = new ArrayList<>();
 
-
+        if (users.size() > 0) {
+            for (UserEntity user : users) {
+                UserDTO userDTO = new UserDTO();
+                userDTO.setUserName(user.getUserName());
+                userDTO.setUserAge(user.getUserAge());
+                userDTO.setPostCode(user.getPostCode());
+                userDTO.setAdderess(user.getAdderess());
+                userDTO.setAdderessDetail(user.getAdderessDetail());
+                userDTOS.add(userDTO);
+            }
+        }else {
+            return null;
+        }
+            return userDTOS;
+    }
 
 }
