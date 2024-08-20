@@ -1,9 +1,8 @@
 package com.ohgiraffers.pizzahouse.user.model;
 
 
+import com.ohgiraffers.pizzahouse.utill.Utills;
 import jakarta.persistence.*;
-
-import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "tbl_user")
@@ -46,10 +45,10 @@ public class UserEntity {
         }
 
         public Builder setUserName(String userName) {
-            Pattern pattern = Pattern.compile("^[가-힣]+$");
+
             if (userName == null || userName.isEmpty()) {
                 throw new IllegalArgumentException("입력해 주세요");
-            } else if (!pattern.matcher(userName).matches()) {
+            } else if (!Utills.regex(userName)) {
                 throw new IllegalArgumentException("한글로 입력해 주세요");
             } else if (userName.length() > 3) {
                 throw new IllegalArgumentException("3글자 이하로 입력해 주세요");
