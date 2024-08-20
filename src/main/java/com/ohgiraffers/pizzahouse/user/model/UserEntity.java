@@ -59,8 +59,14 @@ public class UserEntity {
             }
         }
         public Builder setUserAge(Integer userAge) {
-            this.userAge = userAge;
-            return this;
+            if (userAge == null || userAge < 0) {
+                throw new IllegalArgumentException("입력해 주세요");
+            }else if (userAge < 20) {
+                throw new IllegalArgumentException("20세 이상만 가입이 가능합니다.");
+            }else {
+                this.userAge = userAge;
+                return this;
+            }
         }
         public Builder setPostCode(int postCode) {
             this.postCode = postCode;
