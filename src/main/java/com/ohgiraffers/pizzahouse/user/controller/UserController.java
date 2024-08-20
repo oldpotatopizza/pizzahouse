@@ -69,8 +69,6 @@ public class UserController {
         map.put("success","회원등록이 완료되었습니다");
         return ResponseEntity.status(201).body(map);
     }
-
-
     @GetMapping("/")
     public ResponseEntity<Map<String,Object>> getAllUsers() {
         Map<String, Object> map = new HashMap<>();
@@ -84,4 +82,26 @@ public class UserController {
             return ResponseEntity.status(400).body(map);
         }
     }
+    @GetMapping("/{userId}")
+    public ResponseEntity<Map<String,Object>> detailUser( @PathVariable Integer userId){
+        Map<String,Object> map = new HashMap<>();
+
+        if (userId <=0 || userId == null) {
+            map.put(" error ", "다시 시도해주세요.");
+            return ResponseEntity.status(400).body(map);
+        }
+
+        UserDTO findDTO = userService.detailUser(userId);
+        if (findDTO != null) {
+            map.put("UserInfo", findDTO);
+            return ResponseEntity.status(201).body(map);
+        }
+        else {
+            map.put("error", "조회실패");
+            return ResponseEntity.status(400).body(map);
+        }
+        }
+
+
+
 }

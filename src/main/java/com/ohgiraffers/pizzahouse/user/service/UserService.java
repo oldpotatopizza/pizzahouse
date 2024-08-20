@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,4 +79,21 @@ public class UserService {
             return userDTOS;
     }
 
+    public UserDTO detailUser(Integer userId) {
+        Optional<UserEntity> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserName(user.get().getUserName());
+            userDTO.setUserAge(user.get().getUserAge());
+            userDTO.setPostCode(user.get().getPostCode());
+            userDTO.setAdderess(user.get().getAdderess());
+            userDTO.setAdderessDetail(user.get().getAdderessDetail());
+
+            return userDTO;
+        }
+        else {
+            return null;
+        }
+    }
 }
