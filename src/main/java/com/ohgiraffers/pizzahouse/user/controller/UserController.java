@@ -39,7 +39,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(map);
 
             // 나이 20세 이상만 가입가능
-        } else if (userDTO.getUserAge() <= 20) {
+        } else if (userDTO.getUserAge() < 20) {
 
             Map<Integer, String> map = new HashMap<>();
             map.put(userDTO.getUserAge(), "20세 이상만 가입이 가능합니다");
