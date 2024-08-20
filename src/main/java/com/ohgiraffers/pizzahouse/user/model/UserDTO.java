@@ -4,6 +4,7 @@ import java.util.List;
 
 public class UserDTO {
 
+    private Integer userId;
     private String userName; // 이름
     private int userAge; // 나이
     private int postCode; // 우편번호
@@ -13,7 +14,8 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO( String userName, int userAge, int postCode, String adderess, String adderessDetail) {
+    public UserDTO(Integer userId, String userName, int userAge, int postCode, String adderess, String adderessDetail) {
+        this.userId = userId;
         this.userName = userName;
         this.userAge = userAge;
         this.postCode = postCode;
@@ -21,7 +23,12 @@ public class UserDTO {
         this.adderessDetail = adderessDetail;
     }
 
-    public UserDTO(List<UserEntity> allUser) {
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
