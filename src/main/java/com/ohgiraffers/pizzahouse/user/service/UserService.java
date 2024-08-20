@@ -96,4 +96,28 @@ public class UserService {
             return null;
         }
     }
+
+
+    public UserDTO deleteUpdate(Integer userId) {
+        Optional<UserEntity> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setStatus(userDTO.getStatus());
+            // 상태값을 Y에서 N으로 업데이터.
+
+////            UserEntity userEntity = new UserEntity.Builder()
+////                    .setStatus(userDTO.getStatus());
+////
+////                    .builder();
+//
+//            userRepository.save(userEntity);
+
+
+
+            return userDTO;
+
+        }else {
+            return null;
+        }
+    }
 }

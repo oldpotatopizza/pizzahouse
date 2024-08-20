@@ -69,6 +69,8 @@ public class UserController {
         map.put("success","회원등록이 완료되었습니다");
         return ResponseEntity.status(201).body(map);
     }
+
+    // 전체조회
     @GetMapping("/")
     public ResponseEntity<Map<String,Object>> getAllUsers() {
         Map<String, Object> map = new HashMap<>();
@@ -82,6 +84,8 @@ public class UserController {
             return ResponseEntity.status(400).body(map);
         }
     }
+
+    //상세조회
     @GetMapping("/{userId}")
     public ResponseEntity<Map<String,Object>> detailUser( @PathVariable Integer userId){
         Map<String,Object> map = new HashMap<>();
@@ -100,7 +104,31 @@ public class UserController {
             map.put("error", "조회실패");
             return ResponseEntity.status(400).body(map);
         }
+    }
+
+
+    @PutMapping("/delete/{userId}")
+    public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Integer userId){
+        Map<String, Object> map = new HashMap<>();
+
+        if (userId <=0 || userId == null) {
+            map.put("error", "다시 시도해주세요");
+            return ResponseEntity.status(400).body(map);
         }
+        UserDTO findDTO = userService.deleteUpdate(userId);
+        if (findDTO != null) {
+            map.put("userInfo", "성공적으로 삭제되었습니다!");
+            return ResponseEntity.status(201).body(map);
+
+
+        }else {
+            map.put("error","삭제할 데이터가 없습니다");
+            return ResponseEntity.status(400).body(map);
+        }
+
+
+
+    }
 
 
 
