@@ -1,6 +1,5 @@
 package com.ohgiraffers.pizzahouse.user.model;
 
-import java.util.List;
 
 public class UserDTO {
 
@@ -8,19 +7,19 @@ public class UserDTO {
     private String userName; // 이름
     private int userAge; // 나이
     private int postCode; // 우편번호
-    private String adderess; //기본주소
-    private String adderessDetail; //상세주소
+    private String address; //기본주소
+    private String addressDetail; //상세주소
 
     public UserDTO() {
     }
 
-    public UserDTO(Integer userId, String userName, int userAge, int postCode, String adderess, String adderessDetail) {
+    public UserDTO(Integer userId, String userName, int userAge, int postCode, String address, String adderessDetail) {
         this.userId = userId;
         this.userName = userName;
         this.userAge = userAge;
         this.postCode = postCode;
-        this.adderess = adderess;
-        this.adderessDetail = adderessDetail;
+        this.address = address;
+        this.addressDetail = adderessDetail;
     }
 
     public Integer getUserId() {
@@ -55,19 +54,19 @@ public class UserDTO {
         this.postCode = postCode;
     }
 
-    public String getAdderess() {
-        return adderess;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdderess(String adderess) {
-        this.adderess = adderess;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getAdderessDetail() {
-        return adderessDetail;
+    public String getAddressDetail() {
+        return addressDetail;
     }
 
-    public void setAdderessDetail(String adderessDetail) {
-        this.adderessDetail = adderessDetail;
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail;
     }
 }

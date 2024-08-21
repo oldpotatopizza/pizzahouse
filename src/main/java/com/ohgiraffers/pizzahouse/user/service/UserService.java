@@ -5,13 +5,13 @@ import com.ohgiraffers.pizzahouse.user.model.UserDTO;
 import com.ohgiraffers.pizzahouse.user.model.UserEntity;
 import com.ohgiraffers.pizzahouse.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -32,12 +32,12 @@ public class UserService {
     @Transactional
     public UserDTO userSave(UserDTO userDTO) {
         List<UserEntity> users = userRepository.findByUserName(userDTO.getUserName());
-        if(!users.isEmpty()) {
-            String targetAddress = userDTO.getAdderess() + userDTO.getAdderessDetail() + userDTO.getPostCode();
+        if (!users.isEmpty()) {
+            String targetAddress = userDTO.getAddress() + userDTO.getAddressDetail() + userDTO.getPostCode();
             List<UserEntity> allUser = userRepository.findAll();
-            for(UserEntity user : allUser) {
-                String value  = user.getAdderess() + user.getAdderessDetail() + user.getPostCode();
-                if(targetAddress.equals(value)){
+            for (UserEntity user : allUser) {
+                String value = user.getAddress() + user.getAddressDetail() + user.getPostCode();
+                if (targetAddress.equals(value)) {
                     return null;
                 }
             }
@@ -47,8 +47,8 @@ public class UserService {
                 .setUserName(userDTO.getUserName())
                 .setUserAge(userDTO.getUserAge())
                 .setPostCode(userDTO.getPostCode())
-                .setAdderess(userDTO.getAdderess())
-                .setAdderessDetail(userDTO.getAdderessDetail())
+                .setAdderess(userDTO.getAddress())
+                .setAddressDetail(userDTO.getAddressDetail())
                 .builder();
 
         userRepository.save(userEntity);
@@ -69,14 +69,14 @@ public class UserService {
                 userDTO.setUserName(user.getUserName());
                 userDTO.setUserAge(user.getUserAge());
                 userDTO.setPostCode(user.getPostCode());
-                userDTO.setAdderess(user.getAdderess());
-                userDTO.setAdderessDetail(user.getAdderessDetail());
+                userDTO.setAddress(user.getAddress());
+                userDTO.setAddressDetail(user.getAddressDetail());
                 userDTOS.add(userDTO);
             }
-        }else {
+        } else {
             return null;
         }
-            return userDTOS;
+        return userDTOS;
     }
 
     public UserDTO detailUser(Integer userId) {
@@ -87,13 +87,42 @@ public class UserService {
             userDTO.setUserName(user.get().getUserName());
             userDTO.setUserAge(user.get().getUserAge());
             userDTO.setPostCode(user.get().getPostCode());
-            userDTO.setAdderess(user.get().getAdderess());
-            userDTO.setAdderessDetail(user.get().getAdderessDetail());
+            userDTO.setAddress(user.get().getAddress());
+            userDTO.setAddressDetail(user.get().getAddressDetail());
 
             return userDTO;
-        }
-        else {
+        } else {
             return null;
         }
+    }
+    @Transactional
+    public UserDTO updateUser(Integer userId, UserDTO userDTO) {
+        Optional<UserEntity> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            UserEntity existingUser = user.get();
+            existingUser.setUserName(userDTO.getUserName());
+            existingUser.setUserAge(userDTO.getUserAge());
+            existingUser.setPostCode(userDTO.getPostCode());
+            existingUser.setAddress(userDTO.getAddress());
+            existingUser.setAddressDetail(userDTO.getAddressDetail());
+
+            userRepository.save(existingUser);
+
+            return convertToDTO(existingUser);
+        } else {
+            throw new RuntimeException("유저의 아이디를 찾을 수 없습니다." + userId);
+        }
+    }
+
+    private UserDTO convertToDTO(UserEntity userEntity) {
+        return new UserDTO(
+                userEntity.getUserId(),
+                userEntity.getUserName(),
+                userEntity.getUserAge(),
+                userEntity.getPostCode(),
+                userEntity.getAddress(),
+                userEntity.getAddressDetail()
+        );
     }
 }

@@ -22,10 +22,10 @@ public class UserEntity {
     private int postCode; // 우편번호
 
     @Column(name = "user_address", nullable = false)
-    private String adderess; //기본주소
+    private String address; //기본주소
 
-    @Column(name = "user_addressDetail")
-    private String adderessDetail; //상세주소
+    @Column(name = "user_address_detail")
+    private String addressDetail; //상세주소
 
     public UserEntity() {
     }
@@ -34,11 +34,11 @@ public class UserEntity {
         private String userName;
         private Integer userAge;
         private int postCode;
-        private String adderess;
-        private String adderessDetail;
+        private String address;
+        private String addressDetail;
 
         public UserEntity builder() {
-            if (userName == null || userAge == null || adderess == null || adderessDetail == null) {
+            if (userName == null || userAge == null || address == null || addressDetail == null) {
                 throw new IllegalArgumentException("곳간을 채워주세요");
             }
             return new UserEntity(this);
@@ -72,11 +72,11 @@ public class UserEntity {
             return this;
         }
         public Builder setAdderess(String adderess) {
-            this.adderess = adderess;
+            this.address = adderess;
             return this;
         }
-        public Builder setAdderessDetail(String adderessDetail) {
-            this.adderessDetail = adderessDetail;
+        public Builder setAddressDetail(String addressDetail) {
+            this.addressDetail = addressDetail;
             return this;
         }
 
@@ -85,8 +85,8 @@ public class UserEntity {
         this.userName = builder.userName;
         this.userAge = builder.userAge;
         this.postCode = builder.postCode;
-        this.adderess = builder.adderess;
-        this.adderessDetail = builder.adderessDetail;
+        this.address = builder.address;
+        this.addressDetail = builder.addressDetail;
     }
 
     public Integer getUserId() {
@@ -105,12 +105,36 @@ public class UserEntity {
         return postCode;
     }
 
-    public String getAdderess() {
-        return adderess;
+    public String getAddress() {
+        return address;
     }
 
-    public String getAdderessDetail() {
-        return adderessDetail;
+    public String getAddressDetail() {
+        return addressDetail;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
+
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAddressDetail(String addrssDetail) {
+        this.addressDetail = addrssDetail;
     }
 
     @Override
@@ -120,8 +144,8 @@ public class UserEntity {
                 ", userName='" + userName + '\'' +
                 ", userAge='" + userAge + '\'' +
                 ", postCode=" + postCode +
-                ", adderess='" + adderess + '\'' +
-                ", adderessDetail='" + adderessDetail + '\'' +
+                ", address='" + address + '\'' +
+                ", addressDetail='" + addressDetail + '\'' +
                 '}';
     }
 }
